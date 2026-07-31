@@ -1,3 +1,11 @@
+// An online shop keeps it products catalog sorted by product id(whole number) in acending order.
+// when a costomer search for a specific product id the system return true if the product id present int he catalog else it return false.
+// which searching tecnique is used to find the product id quickly from the catalog.
+// implement this searching method using a function. 
+// the function takse parameters product id list and size of the list and product id to be searched.
+// Sample Inputs : [2,8,9,16,18,26,38,48,51,90]
+// Case 1: product to be search : 26
+// Case 2: product to be search : 49
 #include <stdio.h>
 void binarySearch(int arr[], int size, int target) {
     int left = 0;
