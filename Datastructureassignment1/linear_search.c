@@ -1,5 +1,12 @@
+// In a library books are sorted in access number.
+// The access number can only be whole number that consist maximum of three digit.
+// Consider and array the access number of the books are stored in a usorganised fasion.
+// the librarian want to search for an specific acees number in an array.
+// Which searching methodology sould be follows , r=write the program impleming the searching tecnique.
+// Sample Input : [101,20,49,385,210,620,85,921,12,206]
+// case1: an acess no to be searched: 85
+// case2: an acess no to be searched: 465
 #include <stdio.h>
-
 int main()
 {
     int arr[] = {101, 20, 40, 385, 210, 620, 85, 921, 12, 206};
