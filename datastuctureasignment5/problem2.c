@@ -1,6 +1,8 @@
 //write a c program to implement single link list
+
 #include <stdio.h>
 #include <stdlib.h>
+
 struct Node {
     int data;
     struct Node *next;
@@ -8,19 +10,7 @@ struct Node {
 
 struct Node *head = NULL;
 
-void insertAtBeginning(int value)
-{
-    struct Node *newNode;
-
-    newNode = (struct Node *)malloc(sizeof(struct Node));
-
-    newNode->data = value;
-    newNode->next = head;
-    head = newNode;
-}
-
-void insertAtEnd(int value)
-{
+void insert(int value) {
     struct Node *newNode;
     struct Node *temp;
 
@@ -31,58 +21,22 @@ void insertAtEnd(int value)
 
     if (head == NULL) {
         head = newNode;
-        return;
-    }
-
-    temp = head;
-
-    while (temp->next != NULL) {
-        temp = temp->next;
-    }
-
-    temp->next = newNode;
-}
-
-void deleteNode(int value)
-{
-    struct Node *temp;
-    struct Node *prev;
-
-    temp = head;
-    prev = NULL;
-
-    while (temp != NULL && temp->data != value) {
-        prev = temp;
-        temp = temp->next;
-    }
-
-    if (temp == NULL) {
-        printf("Element not found\n");
-        return;
-    }
-
-    if (prev == NULL) {
-        head = temp->next;
     } else {
-        prev->next = temp->next;
-    }
+        temp = head;
 
-    free(temp);
-    printf("Element deleted\n");
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+
+        temp->next = newNode;
+    }
 }
 
-void display()
-{
-    struct Node *temp;
 
-    if (head == NULL) {
-        printf("List is empty\n");
-        return;
-    }
+void display() {
+    struct Node *temp = head;
 
-    temp = head;
-
-    printf("Linked List: ");
+    printf("Singly Linked List: ");
 
     while (temp != NULL) {
         printf("%d -> ", temp->data);
@@ -92,50 +46,19 @@ void display()
     printf("NULL\n");
 }
 
-int main()
-{
-    int choice, value;
+int main() {
+    int n, i, value;
 
-    while (1) {
-        printf("\n--- Singly Linked List ---\n");
-        printf("1. Insert at beginning\n");
-        printf("2. Insert at end\n");
-        printf("3. Delete\n");
-        printf("4. Display\n");
-        printf("5. Exit\n");
-        printf("Enter your choice: ");
-        scanf("%d", &choice);
+    printf("Enter number of nodes: ");
+    scanf("%d", &n);
 
-        switch (choice) {
-            case 1:
-                printf("Enter value: ");
-                scanf("%d", &value);
-                insertAtBeginning(value);
-                break;
-
-            case 2:
-                printf("Enter value: ");
-                scanf("%d", &value);
-                insertAtEnd(value);
-                break;
-
-            case 3:
-                printf("Enter value to delete: ");
-                scanf("%d", &value);
-                deleteNode(value);
-                break;
-
-            case 4:
-                display();
-                break;
-
-            case 5:
-                return 0;
-
-            default:
-                printf("Invalid choice\n");
-        }
+    for (i = 0; i < n; i++) {
+        printf("Enter value: ");
+        scanf("%d", &value);
+        insert(value);
     }
+
+    display();
 
     return 0;
 }
