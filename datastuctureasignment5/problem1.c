@@ -17,20 +17,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Node structure representing a student record
 struct Node {
     int studentID;
     struct Node *next;
 };
 
-// HEAD pointer
 struct Node *head = NULL;
 
-// Function to add a student at the end
 void addStudent(int id) {
     struct Node *newNode;
 
-    // Allocate memory dynamically
     newNode = (struct Node *)malloc(sizeof(struct Node));
 
     if (newNode == NULL) {
@@ -41,12 +37,11 @@ void addStudent(int id) {
     newNode->studentID = id;
     newNode->next = NULL;
 
-    // If list is empty
     if (head == NULL) {
         head = newNode;
     } 
     else {
-        // Traverse to the last node
+        
         struct Node *temp = head;
 
         while (temp->next != NULL) {
