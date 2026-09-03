@@ -17,60 +17,115 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct Node
-{
+// Node structure representing a student record
+struct Node {
     int studentID;
     struct Node *next;
 };
 
-int main()
-{
-    struct Node *HEAD = NULL;
+// HEAD pointer
+struct Node *head = NULL;
+
+// Function to add a student at the end
+void addStudent(int id) {
     struct Node *newNode;
-    struct Node *temp;
-    int n, i;
 
+    // Allocate memory dynamically
+    newNode = (struct Node *)malloc(sizeof(struct Node));
 
-    printf("Enter number of students: ");
-    scanf("%d", &n);
-
-  
-    for (i = 1; i <= n; i++)
-    {
-        newNode = (struct Node *)malloc(sizeof(struct Node));
-
-        printf("Enter Student ID %d: ", i);
-        scanf("%d", &newNode->studentID);
-
-        newNode->next = NULL;
-
-        if (HEAD == NULL)
-        {
-            HEAD = newNode;
-        }
-        else
-        {
-    
-            temp = HEAD;
-
-            while (temp->next != NULL)
-            {
-                temp = temp->next;
-            }
-
-        
-            temp->next = newNode;
-        }
+    if (newNode == NULL) {
+        printf("Memory allocation failed!\n");
+        return;
     }
 
-    printf("\nStudent Records:\n");
+    newNode->studentID = id;
+    newNode->next = NULL;
 
-    temp = HEAD;
+    // If list is empty
+    if (head == NULL) {
+        head = newNode;
+    } 
+    else {
+        // Traverse to the last node
+        struct Node *temp = head;
 
-    while (temp != NULL)
-    {
-        printf("Student ID: %d\n", temp->studentID);
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+
+        // Link new node at the end
+        temp->next = newNode;
+    }
+
+    printf("Student ID %d registered successfully.\n", id);
+}
+
+// Function to display all students
+void displayStudents() {
+    struct Node *temp;
+    int count = 1;
+
+    if (head == NULL) {
+        printf("No students registered yet.\n");
+        return;
+    }
+
+    temp = head;
+
+    printf("\n--- List of Registered Students ---\n");
+
+    while (temp != NULL) {
+        printf("%d. Student ID: %d\n", count, temp->studentID);
         temp = temp->next;
+        count++;
+    }
+
+    printf("------------------------------------\n");
+}
+
+// Function to free allocated memory
+void freeList() {
+    struct Node *temp;
+
+    while (head != NULL) {
+        temp = head;
+        head = head->next;
+        free(temp);
+    }
+}
+
+// Main function
+int main() {
+    int choice, id;
+
+    while (1) {
+        printf("\n===== Workshop Student Registration =====\n");
+        printf("1. Add Student\n");
+        printf("2. Display All Students\n");
+        printf("3. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+
+            case 1:
+                printf("Enter Student ID: ");
+                scanf("%d", &id);
+                addStudent(id);
+                break;
+
+            case 2:
+                displayStudents();
+                break;
+
+            case 3:
+                freeList();
+                printf("Exiting program. Memory freed successfully.\n");
+                exit(0);
+
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
     }
 
     return 0;
